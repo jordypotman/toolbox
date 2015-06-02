@@ -1,0 +1,37 @@
+#!/bin/bash
+
+TOOLBOX_DIR=$HOME/toolbox
+
+function install_libevent {
+  cd $TOOLBOX_DIR
+  mkdir -p tools/libevent/2.0.22/src
+  cd tools/libevent/2.0.22/src
+  wget --no-check-certificate https://sourceforge.net/projects/levent/files/libevent/libevent-2.0/libevent-2.0.22-stable.tar.gz
+  tar -zxf libevent-2.0.22-stable.tar.gz 
+  cd ..
+  mkdir -p build
+  cd build
+  ../src/libevent-2.0.22-stable/configure --prefix=$PWD/../install
+  make install
+  cd $TOOLBOX_DIR
+  mkdir -p lib
+  ln -s -t lib ../tools/libevent/2.0.22/install/lib/libevent-2.0.so.5
+}
+
+function install_tmux {
+  cd $TOOLBOX_DIR
+  mkdir -p tools/tmux/2.0/src
+  cd tools/tmux/2.0/src
+  wget http://downloads.sourceforge.net/tmux/tmux-2.0.tar.gz
+  tar -zxf tmux-2.0.tar.gz 
+  cd ..
+  mkdir -p build
+  cd build
+  LDFLAGS=-Wl,-rpath=$HOME/toolbox/lib,--enable-new-dtags PKG_CONFIG_PATH=$HOME/toolbox/tools/libevent/2.0.22/install/lib/pkgconfig ../src/tmux-2.0/configure --prefix=$PWD/../install
+  make install
+  cd $TOOLBOX_DIR
+  mkdir -p bin
+  ln -s -t bin ../tools/tmux/2.0/install/bin/tmux 
+}
+
+install_tmux
