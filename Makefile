@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 TOOLBOX_DIR := $(HOME)/toolbox
 
 #
