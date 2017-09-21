@@ -1,4 +1,4 @@
-CLANG_VERSION := 3.9.0
+CLANG_VERSION := 5.0.0
 
 clang_dir := $(TOOLBOX_DIR)/tools/clang/$(CLANG_VERSION)
 
