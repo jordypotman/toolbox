@@ -18,4 +18,5 @@ endef
 default:
 	# Do nothing.
 
+include scripts/Makefile
 include tools/*/Makefile
