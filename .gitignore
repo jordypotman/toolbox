@@ -5,3 +5,4 @@ lib/
 libexec/
 share/
 tools/*/*/
+.DS_Store
